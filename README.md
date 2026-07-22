@@ -75,7 +75,7 @@ admin-prototype-builder-skill/
 ├── SKILL.md                         # Skill 入口：需求分析、构建、导出和交付规则
 ├── README.md                        # 本文件：安装、使用、维护和版本发布说明
 ├── CHANGELOG.md                     # 按版本倒序维护的中文更新记录
-├── AGENTS.md                        # Codex 维护与版本发布规则
+├── AGENTS.md                        # 智能体维护、修改、验证与发布规则
 ├── .github/
 │   ├── scripts/validate-release.mjs # 版本、完整性和安全校验
 │   └── workflows/release.yml        # main 更新后自动发布 Release
@@ -116,6 +116,6 @@ Codex 会按照下面的顺序完成工作：
 
 ## 版本与更新
 
-当前稳定版本：`v2.0.6`。
+当前稳定版本：`v2.0.7`。
 
 所有版本的更新记录统一维护在 [CHANGELOG.md](CHANGELOG.md)，正式安装包通过 [GitHub Releases](https://github.com/leocine/admin-prototype-builder-skill/releases) 发布。合并到 `main` 后会自动提取当前版本记录并生成 Tag、Release 和干净 ZIP；维护细则见 `AGENTS.md`。
