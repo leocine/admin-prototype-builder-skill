@@ -1,67 +1,67 @@
-# Backend design system
+# 后台设计规范
 
-Use this as the visual contract. Actual values come from the selected runtime's `src/index.css`, `tailwind.config.ts`, and `src/components/ui`. The bundled V2 runtime is a portable extraction of the same standard.
+将本文件作为视觉约束。实际变量值以选定运行时中的 `src/index.css`、`tailwind.config.ts` 和 `src/components/ui` 为准。内置 V2 运行时是同一套规范的可分发精简版本。
 
-## Direction
+## 设计方向
 
-- Professional, restrained, clear, and trustworthy.
-- Neutral black/white/grey foundation.
-- Establish hierarchy through typography, spacing, and grouping rather than decoration.
-- Use rounded controls to soften dense admin work, without marketing-style effects.
+- 专业、克制、清晰、可信。
+- 使用黑、白、灰作为中性基础色。
+- 主要通过字体、间距和分组建立信息层级，不依赖装饰。
+- 使用圆角控件缓和后台页面的信息密度，但不得采用营销页面式视觉效果。
 
-## Semantic tokens
+## 语义化颜色变量
 
-Use only semantic Tailwind colors:
+只能使用 Tailwind 语义化颜色：
 
-- `background`: page background.
-- `card`: content surface.
-- `foreground`: headings and primary information.
-- `muted` / `muted-foreground`: secondary surfaces and supporting text.
-- `primary`: the single primary action in a region.
-- `secondary`: secondary action or surface.
-- `accent`: hover or selected surface.
-- `destructive`: destructive action or negative state.
-- `border`, `input`, `ring`: boundaries and focus.
+- `background`：页面背景。
+- `card`：内容容器背景。
+- `foreground`：标题和主要信息。
+- `muted` / `muted-foreground`：次要容器和辅助文字。
+- `primary`：一个区域内的唯一主操作。
+- `secondary`：次要操作或次要容器。
+- `accent`：悬停或选中状态。
+- `destructive`：危险操作或负向状态。
+- `border`、`input`、`ring`：边界、输入框和焦点状态。
 
-Do not write hex/RGB/HSL values in a business page. Do not import Tailwind fixed palettes such as `blue-500`.
+业务页面不得直接编写十六进制、RGB 或 HSL 色值，也不得使用 `blue-500` 等 Tailwind 固定色板。
 
-## Type
+## 字体层级
 
-| Role | Size | Use |
+| 用途 | 字号与字重 | 使用位置 |
 | --- | --- | --- |
-| Page title | 20–24px semibold | Page identity |
-| Module title | 16–18px semibold | Filters, table, detail group |
-| Body | 14px regular | Forms, tables, details |
-| Supporting | 12px regular | IDs, time, hints, metadata |
+| 页面标题 | 20–24px，semibold | 页面身份 |
+| 模块标题 | 16–18px，semibold | 筛选区、表格、详情分组 |
+| 正文 | 14px，regular | 表单、表格、详情 |
+| 辅助文字 | 12px，regular | ID、时间、提示、元数据 |
 
-Use monospace only for machine-shaped values such as UID, IP, and order numbers.
+只有 UID、IP、订单号等机器型数据可以使用等宽字体。
 
-## Spacing and shape
+## 间距与形状
 
-- Base unit: 4px. Prefer 8, 12, 16, 20, 24, 32px.
-- Related items: 8–12px.
-- Field groups: 16–20px.
-- Card padding: 20–24px.
-- Page modules: 20–24px.
-- Page edge: 24–32px desktop; 16–20px narrow.
-- Cards: approximately 16px radius.
-- Buttons, inputs, selects, and tabs: pill-shaped per the existing components.
-- Prefer borders to heavy shadows.
+- 基础间距单位为 4px，优先使用 8、12、16、20、24、32px。
+- 关联元素间距：8–12px。
+- 字段组间距：16–20px。
+- Card 内边距：20–24px。
+- 页面模块间距：20–24px。
+- 桌面页面边距：24–32px；窄屏页面边距：16–20px。
+- Card 圆角约为 16px。
+- Button、Input、Select 和 Tabs 按现有组件使用胶囊形态。
+- 优先使用边框，不使用厚重阴影。
 
-## Composition
+## 页面组合
 
-- Do not put the page title in a card by default.
-- Use cards only for clear information boundaries.
-- Avoid card-inside-card repetition.
-- Keep primary content left-aligned.
-- Group dangerous actions separately from common actions.
-- Reduce visible choices through grouping or progressive disclosure when a region exceeds 4–6 decisions.
+- 默认不得把页面标题放入 Card。
+- 只有存在清晰信息边界时才使用 Card。
+- 避免机械地嵌套 Card。
+- 主要内容保持左对齐。
+- 将危险操作与普通操作分组隔离。
+- 一个区域出现超过 4–6 个决策项时，通过分组或渐进展示减少可见选项。
 
-## Responsive behavior
+## 响应式行为
 
-- Preserve critical actions on narrow screens.
-- Let filters stack.
-- Let action groups wrap.
-- Let tabs and tables scroll inside their own containers.
-- Do not let a wide table set the page width.
-- Keep touch targets near 44px where practical.
+- 窄屏下必须保留关键操作。
+- 筛选项允许纵向堆叠。
+- 操作组允许自动换行。
+- Tabs 和 Table 必须在各自容器内部滚动。
+- 宽表格不得撑开整个页面。
+- 条件允许时，触控目标应接近 44px。

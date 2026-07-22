@@ -56,7 +56,7 @@ if (!readme.includes('当前稳定版本：' + String.fromCharCode(96) + 'v' + p
   fail('README 当前稳定版本必须是 v' + packageJson.version)
 }
 const changelog = fs.readFileSync(path.join(root, 'CHANGELOG.md'), 'utf8')
-if (!changelog.startsWith('# Changelog\n')) fail('CHANGELOG.md 必须以 # Changelog 开头')
+if (!changelog.startsWith('# 更新日志\n')) fail('CHANGELOG.md 必须以 # 更新日志 开头')
 
 const versionHeading = '## v' + packageJson.version
 const versionHeadings = [...changelog.matchAll(/^## v\d+\.\d+\.\d+$/gm)]
