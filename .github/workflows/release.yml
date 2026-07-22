@@ -49,6 +49,9 @@ jobs:
           VERSION="$(node -p "require('./assets/platform-runtime/package.json').version")"
           TAG="v${VERSION}"
           ARCHIVE="admin-prototype-builder-${TAG}.zip"
+          NOTES="${RUNNER_TEMP}/release-notes.md"
+
+          node .github/scripts/validate-release.mjs --notes-output "${NOTES}"
 
           if git rev-parse --verify --quiet "refs/tags/${TAG}"; then
             echo "Tag ${TAG} already exists. Increment the version before merging."
@@ -57,7 +60,7 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git tag -a "${TAG}" -m "Admin Prototype Builder ${TAG}"
+          git tag -a "${TAG}" -m "版本 ${TAG}"
           git push origin "${TAG}"
 
           git archive --format=zip --prefix=admin-prototype-builder/ --output="${ARCHIVE}" "${TAG}"
@@ -70,4 +73,4 @@ jobs:
           gh release create "${TAG}" "${ARCHIVE}" \
             --verify-tag \
             --title "${TAG}" \
-            --notes-file .github/RELEASE_NOTES.md
+            --notes-file "${NOTES}"

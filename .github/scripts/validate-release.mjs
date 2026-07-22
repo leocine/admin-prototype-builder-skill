@@ -30,7 +30,7 @@ const requiredPaths = [
   'SKILL.md',
   'README.md',
   'AGENTS.md',
-  '.github/RELEASE_NOTES.md',
+  'CHANGELOG.md',
   'agents/openai.yaml',
   'assets/page-shell.tsx',
   'assets/platform-runtime/src/components/ui',
@@ -55,16 +55,28 @@ const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8')
 if (!readme.includes('当前稳定版本：' + String.fromCharCode(96) + 'v' + packageJson.version + String.fromCharCode(96))) {
   fail('README 当前稳定版本必须是 v' + packageJson.version)
 }
-const releaseNotes = fs.readFileSync(path.join(root, '.github', 'RELEASE_NOTES.md'), 'utf8')
-if (!releaseNotes.startsWith('# v' + packageJson.version + '\n')) {
-  fail('中文发布说明的首行必须是 # v' + packageJson.version)
+const changelog = fs.readFileSync(path.join(root, 'CHANGELOG.md'), 'utf8')
+if (!changelog.startsWith('# Changelog\n')) fail('CHANGELOG.md 必须以 # Changelog 开头')
+
+const versionHeading = '## v' + packageJson.version
+const versionHeadings = [...changelog.matchAll(/^## v\d+\.\d+\.\d+$/gm)]
+if (!versionHeadings.length || versionHeadings[0][0] !== versionHeading) {
+  fail('CHANGELOG.md 的最新版本必须是 v' + packageJson.version)
 }
-if (!/[\u3400-\u9fff]/.test(releaseNotes)) {
-  fail('发布说明必须使用中文')
+
+const sectionStart = changelog.indexOf(versionHeading)
+const nextSection = sectionStart >= 0 ? changelog.indexOf('\n## v', sectionStart + versionHeading.length) : -1
+const currentEntry = sectionStart >= 0
+  ? changelog.slice(sectionStart, nextSection >= 0 ? nextSection : undefined).trim()
+  : ''
+if (!/[\u3400-\u9fff]/.test(currentEntry)) fail('CHANGELOG.md 当前版本内容必须使用中文')
+if (/使用影响|验证结果|What's Changed|Full Changelog|Release validation passed|Tag and ZIP were generated|The ZIP excludes/.test(currentEntry)) {
+  fail('CHANGELOG.md 当前版本只应包含中文更新内容')
 }
-if (/What's Changed|Full Changelog|Release validation passed|Tag and ZIP were generated|The ZIP excludes/.test(releaseNotes)) {
-  fail('发布说明不应混入英文自动文案')
-}
+
+const notesOutputIndex = process.argv.indexOf('--notes-output')
+const notesOutput = notesOutputIndex >= 0 ? process.argv[notesOutputIndex + 1] : ''
+if (notesOutputIndex >= 0 && !notesOutput) fail('使用 --notes-output 时必须提供输出路径')
 
 const baseIndex = process.argv.indexOf('--base')
 if (baseIndex >= 0) {
@@ -104,6 +116,7 @@ const secretPatterns = [
 for (const relative of tracked) {
   if (forbiddenPath.test(relative)) fail('仓库包含禁止文件：' + relative)
   const absolute = path.join(root, relative)
+  if (!fs.existsSync(absolute)) continue
   if (!fs.statSync(absolute).isFile()) continue
   const content = fs.readFileSync(absolute)
   if (content.includes(0)) continue
@@ -123,5 +136,7 @@ if (failures.length) {
   process.stderr.write('Release validation failed:\n' + failures.map((item) => '- ' + item).join('\n') + '\n')
   process.exit(1)
 }
+
+if (notesOutput) fs.writeFileSync(path.resolve(root, notesOutput), currentEntry + '\n')
 
 process.stdout.write('Release validation passed for v' + packageJson.version + ' (' + tracked.length + ' tracked files)\n')
