@@ -1,54 +1,54 @@
-# Requirement intake
+# 需求整理规范
 
-## Minimum usable input
+## 最低可用输入
 
-Extract six fields from natural language. Do not force the user to fill a form when the information is already present.
+从用户的自然语言描述中提取以下六类信息。信息已经存在时，不得强制用户填写表单。
 
-| Field | What it changes |
+| 信息 | 影响内容 |
 | --- | --- |
-| Page name | File name, title, business vocabulary |
-| User role | Visible actions and permissions |
-| Page goal | Primary action and information hierarchy |
-| Inputs/filters | Form controls and query behavior |
-| Display data | Table columns or detail groups |
-| Actions and rules | Buttons, states, confirmations, transitions |
+| 页面名称 | 文件名、页面标题和业务用语 |
+| 用户角色 | 可见操作和权限 |
+| 页面目标 | 主要操作和信息层级 |
+| 输入项/筛选项 | 表单控件和查询行为 |
+| 展示数据 | 表格列或详情分组 |
+| 操作与规则 | 按钮、状态、确认和流转逻辑 |
 
-## Ask only material questions
+## 仅追问影响业务的问题
 
-Ask when different answers create different workflows, such as:
+不同答案会产生不同业务流程时才追问，例如：
 
-- Can an approved item be revoked?
-- Which roles can approve?
-- Is rejection reason mandatory?
-- Is selection single-row or batch?
-- Does “delete” mean soft delete, archive, or permanent deletion?
+- 已通过的记录能否撤回？
+- 哪些角色可以审批？
+- 驳回原因是否必填？
+- 选择操作是单条还是批量？
+- “删除”表示软删除、归档还是永久删除？
 
-Do not ask:
+不得追问：
 
-- Button color, radius, control height, table header background.
-- Whether filters sit above the table.
-- How empty/loading states look.
-- Which existing component variant to use.
+- 按钮颜色、圆角、控件高度或表头背景。
+- 筛选区是否放在表格上方。
+- 空数据和加载状态的视觉形式。
+- 应该使用哪个已有组件变体。
 
-## Default assumptions
+## 默认假设
 
-When not specified and low risk:
+需求未说明且风险较低时，采用以下默认值：
 
-- Build a desktop-first responsive prototype.
-- Use local fictional demonstration data labelled `原型数据`.
-- Do not call real APIs.
-- Put the highest-frequency filters first.
-- Use 20 rows per page for list pagination demonstrations.
-- Keep one primary action per region.
-- Require confirmation for destructive actions.
-- Preserve form state while switching between demonstration states.
+- 构建桌面优先并兼容窄屏的响应式原型。
+- 使用本地虚构演示数据，并标注“原型数据”。
+- 不调用真实 API。
+- 将最高频筛选项放在前面。
+- 列表分页演示默认每页 20 条。
+- 每个区域只设置一个主操作。
+- 危险操作必须二次确认。
+- 切换演示状态时保留表单内容。
 
-State assumptions in delivery; do not interrupt work for them.
+在交付说明中列出假设，不得因为这些低风险事项中断工作。
 
-## Product language
+## 产品文案
 
-- Reuse the user's domain terms consistently.
-- Use action labels as `verb + object`: `创建活动`, `通过审核`, `冻结用户`.
-- Name empty states specifically: `暂无退款订单`, not `暂无数据`.
-- Explain an error and next step: `订单加载失败，请重新加载`.
-- Use `—` for unavailable values.
+- 始终复用用户提供的领域术语。
+- 操作名称使用“动词 + 对象”，例如“创建活动”“通过审核”“冻结用户”。
+- 空状态必须具体，例如使用“暂无退款订单”，不得只写“暂无数据”。
+- 错误提示同时说明问题和下一步，例如“订单加载失败，请重新加载”。
+- 无法提供的值统一显示“—”。

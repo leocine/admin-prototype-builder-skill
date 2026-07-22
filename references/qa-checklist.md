@@ -1,48 +1,48 @@
-# QA checklist
+# 交付检查清单
 
-Run this after export and before delivery.
+导出完成后、正式交付前必须执行本清单。
 
-## Business
+## 业务
 
-- Page goal and user role are visible from the page structure.
-- Filters, fields, and actions match the supplied requirement.
-- Enablement, permission, and state-transition rules are represented.
-- Destructive effects require confirmation.
-- Demonstration facts are clearly fictional; no production claims are invented.
+- 从页面结构中能够明确看出页面目标和用户角色。
+- 筛选项、字段和操作与用户提供的需求一致。
+- 已体现启用条件、权限和状态流转规则。
+- 危险操作需要确认。
+- 演示数据明确为虚构数据，没有捏造生产事实。
 
-## Components
+## 组件
 
-- Source imports real `@/components/ui/*` components.
-- No Button/Input/Table/Card/Tabs implementation is copied into the page.
-- One primary button exists per action region.
-- Every input has a visible label.
-- Icon-only controls have `title` and `aria-label`.
-- State is shown with text, not color alone.
-- Missing values display `—`.
+- 源码从 `@/components/ui/*` 导入真实组件。
+- 页面中没有复制 Button、Input、Table、Card 或 Tabs 的实现。
+- 每个操作区域只有一个主按钮。
+- 每个输入控件都有可见 Label。
+- 仅图标控件具有 `title` 和 `aria-label`。
+- 状态同时使用文字表达，不只依赖颜色。
+- 缺失值显示“—”。
 
-## States and interaction
+## 状态与交互
 
-- Loading, normal, empty, error, disabled, and success can be inspected.
-- Query, reset, sort, pagination, tabs, form, and confirmation controls work when present.
-- Reset does not reload the page.
-- Error states offer recovery.
-- Success states confirm the result and next state.
+- 可以检查加载、正常、空数据、失败、禁用和成功状态。
+- 页面存在相应功能时，查询、重置、排序、分页、Tabs、表单和确认控件均可操作。
+- 重置操作不会刷新页面。
+- 失败状态提供恢复操作。
+- 成功状态说明操作结果和下一状态。
 
-## Layout
+## 布局
 
-- At desktop width, information hierarchy is immediately clear.
-- At narrow width, filters stack and actions wrap.
-- Tabs and tables scroll inside themselves, not at document level.
-- No clipped text, overlapping controls, or unreachable actions.
-- Page title is not redundantly repeated in a card.
-- Cards form meaningful boundaries and are not nested mechanically.
+- 桌面宽度下能够立即识别信息层级。
+- 窄屏下筛选项纵向排列，操作组能够换行。
+- Tabs 和 Table 在自身容器中滚动，不引发页面整体横向滚动。
+- 不存在文字裁切、控件重叠或无法触达的操作。
+- 页面标题没有在 Card 中重复出现。
+- Card 形成有意义的边界，没有机械嵌套。
 
-## Offline artifact
+## 离线交付物
 
-- `npm run build` passes in the selected bundled or external runtime.
-- `export-prototype.mjs` succeeds.
-- `validate-prototype.mjs` reports zero failures.
-- Exported HTML contains inline CSS and JavaScript.
-- No external CDN, remote font, remote image, localhost, or asset-file dependency remains.
-- The file opens directly through `file://`.
-- Final HTML and React source are both linked in delivery.
+- 在选定的内置或外部运行时中，`npm run build` 执行成功。
+- `export-prototype.mjs` 执行成功。
+- `validate-prototype.mjs` 报告零项失败。
+- 导出的 HTML 内联包含 CSS 和 JavaScript。
+- 不存在外部 CDN、远程字体、远程图片、localhost 或资源文件依赖。
+- 文件可以通过 `file://` 直接打开。
+- 交付结果同时提供最终 HTML 和 React 源码链接。

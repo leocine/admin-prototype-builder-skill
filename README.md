@@ -1,4 +1,4 @@
-# Admin Prototype Builder Skill
+# 后台原型构建 Skill
 
 这是一个给 Codex 和产品经理使用的后台原型构建 Skill，用于把中文后台产品需求转换为符合统一组件、配色和页面结构规范的 React 交互原型，并导出可直接分享的离线单文件 HTML。
 
@@ -116,6 +116,6 @@ Codex 会按照下面的顺序完成工作：
 
 ## 版本与更新
 
-当前稳定版本：`v2.0.5`。
+当前稳定版本：`v2.0.6`。
 
 所有版本的更新记录统一维护在 [CHANGELOG.md](CHANGELOG.md)，正式安装包通过 [GitHub Releases](https://github.com/leocine/admin-prototype-builder-skill/releases) 发布。合并到 `main` 后会自动提取当前版本记录并生成 Tag、Release 和干净 ZIP；维护细则见 `AGENTS.md`。

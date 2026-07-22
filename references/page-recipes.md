@@ -1,93 +1,93 @@
-# Page recipes
+# 页面模板
 
-Choose one primary recipe. Combine only when the business workflow genuinely spans both structures.
+选择一种主要页面模板。只有业务流程确实同时跨越两种结构时才允许组合。
 
-## L01 Standard list
+## L01 标准列表页
 
-Use for searchable business collections with up to 6 common filters.
+适用于具有搜索能力且常用筛选项不超过 6 个的业务数据集合。
 
-Order:
+页面顺序：
 
-1. Page title, one-line purpose, total count.
-2. Filter Card.
-3. Query and reset.
-4. Table Card with optional sort/export actions.
-5. Count and pagination.
+1. 页面标题、单行用途说明和数据总量。
+2. 筛选 Card。
+3. 查询和重置操作。
+4. Table Card，以及可选的排序或导出操作。
+5. 数量说明和分页。
 
-Hard rules:
+强制规则：
 
-- Put identity first and row actions last.
-- Keep one primary query action.
-- Demonstrate loading, empty, error, and normal table bodies.
-- Keep pagination state local and operable.
+- 业务主体字段放在第一列，行操作放在最后一列。
+- 只设置一个主要查询操作。
+- 必须演示加载、空数据、失败和正常表格状态。
+- 分页状态必须保存在本地并可以操作。
 
-## L02 Advanced-filter list
+## L02 高级筛选列表页
 
-Use when there are more than 6 filters or distinct basic/advanced groups.
+适用于筛选项超过 6 个，或存在基础筛选与高级筛选分组的场景。
 
-Structure:
+页面结构：
 
-- Show 3–6 high-frequency filters initially.
-- Toggle an advanced region for the rest.
-- Show active filter count and removable summary when useful.
-- Preserve table and pagination rules from L01.
+- 初始展示 3–6 个最高频筛选项。
+- 通过展开操作显示其余高级筛选项。
+- 有帮助时展示已启用的筛选数量和可移除的条件摘要。
+- 沿用 L01 的表格和分页规则。
 
-Do not render 10+ equally weighted fields in one uninterrupted grid.
+不得在一个连续网格中同时展示 10 个以上同等权重的字段。
 
-## D01 Standard detail
+## D01 标准详情页
 
-Use for a single object with a manageable number of information groups.
+适用于单个业务对象，且信息可以整理为数量适中的分组。
 
-Order:
+页面顺序：
 
-1. Back action, object title, state.
-2. Common actions; destructive actions separated.
-3. Summary fields.
-4. 2–4 grouped detail sections.
-5. Related records.
+1. 返回操作、对象标题和当前状态。
+2. 常用操作；危险操作独立分组。
+3. 摘要字段。
+4. 2–4 个详情分组。
+5. 关联记录。
 
-Use description lists or label/value rows. Do not turn every field into a metric card.
+使用描述列表或“标签/值”结构，不得把每个字段都制作成指标 Card。
 
-## D02 Complex tabbed detail
+## D02 多标签详情页
 
-Use when one object aggregates multiple peer business domains.
+适用于一个业务对象同时聚合多个同级业务领域。
 
-Structure:
+页面结构：
 
-- Stable identity/summary region.
-- Common and destructive action groups.
-- Up to 7 peer Tabs.
-- Each tab owns its loading, empty, and error state.
-- Put tables inside the relevant tab, not at page root.
+- 稳定展示身份和摘要区域。
+- 分别组织常用操作与危险操作。
+- 最多展示 7 个同级 Tabs。
+- 每个 Tab 独立处理加载、空数据和失败状态。
+- Table 必须放入所属 Tab，不得放在页面根层级。
 
-If more than 7 tabs are required, group them into primary domains or use secondary navigation.
+需要超过 7 个 Tab 时，必须先按主要领域分组或改用二级导航。
 
-## F01 Create/edit form
+## F01 新建/编辑表单
 
-Use for creating or modifying one object.
+适用于创建或修改一个业务对象。
 
-Structure:
+页面结构：
 
-1. Page title and scope.
-2. Form sections grouped by business meaning.
-3. Prefer 4–6 visible fields per group.
-4. Inline help and validation near the field.
-5. Cancel/back plus one primary save action.
-6. Unsaved-change warning demonstration.
+1. 页面标题和作用范围。
+2. 按业务含义划分表单分组。
+3. 每组优先展示 4–6 个字段。
+4. 在字段附近展示帮助信息和校验提示。
+5. 提供取消/返回操作和一个主要保存操作。
+6. 演示未保存内容提醒。
 
-Preserve user input during validation errors. Use safe defaults but never invent consequential business defaults.
+校验失败时必须保留用户输入。可以使用安全默认值，但不得虚构会产生实质影响的业务默认值。
 
-## A01 Review/approval workspace
+## A01 审核工作台
 
-Use when the primary job is comparing evidence and making a decision.
+适用于主要任务是对照材料并做出审核决定的场景。
 
-Structure:
+页面结构：
 
-1. Object identity and current review state.
-2. Submitted content/evidence as the largest region.
-3. Rule or history context beside or below evidence.
-4. Approve/reject actions separated from navigation.
-5. Rejection reason required when business rules demand it.
-6. Confirmation and success feedback.
+1. 对象身份和当前审核状态。
+2. 将提交内容或证据作为页面最大区域。
+3. 在证据旁边或下方展示规则和历史记录。
+4. 审核通过与驳回操作必须和导航操作分离。
+5. 业务规则要求时，驳回原因必须填写。
+6. 提供确认交互和成功反馈。
 
-Do not place approve and reject as visually identical primary actions. Make consequences explicit.
+审核通过和驳回不得使用完全相同的主操作样式，必须明确展示操作后果。

@@ -1,6 +1,6 @@
 interface:
   display_name: "后台原型构建器"
   short_description: "内置 React 组件运行时，生成可独立分享的后台 HTML 原型"
-  default_prompt: "Use $admin-prototype-builder to turn this backend product requirement into a standards-compliant offline HTML prototype using its bundled runtime."
+  default_prompt: "使用 $admin-prototype-builder，将这份后台产品需求转换为符合组件规范、可离线分享的 HTML 交互原型。"
 policy:
   allow_implicit_invocation: true
