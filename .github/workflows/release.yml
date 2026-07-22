@@ -69,10 +69,5 @@ jobs:
 
           gh release create "${TAG}" "${ARCHIVE}" \
             --verify-tag \
-            --generate-notes \
-            --title "Admin Prototype Builder ${TAG}" \
-            --notes "## 自动验证
-
-          - Release validation passed.
-          - Tag and ZIP were generated from the merged main commit.
-          - The ZIP excludes dependencies, build output, prototype output, screenshots, local metadata, and credentials."
+            --title "${TAG}" \
+            --notes-file .github/RELEASE_NOTES.md

@@ -76,6 +76,7 @@ admin-prototype-builder-skill/
 ├── README.md                        # 本文件：安装、使用、维护和版本发布说明
 ├── AGENTS.md                        # Codex 维护与版本发布规则
 ├── .github/
+│   ├── RELEASE_NOTES.md             # 当前版本的中文发布说明
 │   ├── scripts/validate-release.mjs # 版本、完整性和安全校验
 │   └── workflows/release.yml        # main 更新后自动发布 Release
 ├── agents/
@@ -115,6 +116,6 @@ Codex 会按照下面的顺序完成工作：
 
 ## 版本与更新
 
-当前稳定版本：`v2.0.3`。
+当前稳定版本：`v2.0.4`。
 
 所有正式更新都通过 [GitHub Releases](https://github.com/leocine/admin-prototype-builder-skill/releases) 发布。合并到 `main` 后会自动校验并生成 Tag、Release 和干净 ZIP；维护细则见 `AGENTS.md`。

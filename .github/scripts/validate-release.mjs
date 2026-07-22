@@ -30,6 +30,7 @@ const requiredPaths = [
   'SKILL.md',
   'README.md',
   'AGENTS.md',
+  '.github/RELEASE_NOTES.md',
   'agents/openai.yaml',
   'assets/page-shell.tsx',
   'assets/platform-runtime/src/components/ui',
@@ -53,6 +54,16 @@ const currentParts = parseVersion(packageJson.version, '当前版本')
 const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8')
 if (!readme.includes('当前稳定版本：' + String.fromCharCode(96) + 'v' + packageJson.version + String.fromCharCode(96))) {
   fail('README 当前稳定版本必须是 v' + packageJson.version)
+}
+const releaseNotes = fs.readFileSync(path.join(root, '.github', 'RELEASE_NOTES.md'), 'utf8')
+if (!releaseNotes.startsWith('# v' + packageJson.version + '\n')) {
+  fail('中文发布说明的首行必须是 # v' + packageJson.version)
+}
+if (!/[\u3400-\u9fff]/.test(releaseNotes)) {
+  fail('发布说明必须使用中文')
+}
+if (/What's Changed|Full Changelog|Release validation passed|Tag and ZIP were generated|The ZIP excludes/.test(releaseNotes)) {
+  fail('发布说明不应混入英文自动文案')
 }
 
 const baseIndex = process.argv.indexOf('--base')
