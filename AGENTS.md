@@ -23,6 +23,8 @@ Every change intended for main must increment assets/platform-runtime/package.js
 - Major: incompatible behavior, structure, or installation changes.
 
 Keep the README current stable version equal to v plus the package version. Never reuse or move an existing version Tag.
+Update .github/RELEASE_NOTES.md for every version. Write the title and all explanatory content in Chinese, and keep its first heading equal to the version Tag.
+Keep Release notes focused on update content. Do not include usage-impact or validation-result sections in the public Release body.
 
 ## Pull request and release
 
@@ -30,7 +32,7 @@ Keep the README current stable version equal to v plus the package version. Neve
 2. Run node .github/scripts/validate-release.mjs --base <main SHA> before merging.
 3. Describe changes, user impact, and validation in the pull request.
 4. Merge through a pull request; do not push ordinary updates directly to main.
-5. Let .github/workflows/release.yml create the Tag, clean ZIP, and GitHub Release after the merge.
+5. Let .github/workflows/release.yml create the Tag, clean ZIP, and GitHub Release after the merge. Release titles must contain only the version number, such as v2.0.4.
 6. Confirm the workflow succeeds and the new Release is downloadable by authorized collaborators.
 7. If automatic release fails, fix the workflow or repository state. Do not create a mismatched manual Release.
 
