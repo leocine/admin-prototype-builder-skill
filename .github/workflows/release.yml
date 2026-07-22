@@ -1,0 +1,78 @@
+name: Validate and release
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: admin-prototype-builder-release
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate pull request version and package
+        if: github.event_name == 'pull_request'
+        run: node .github/scripts/validate-release.mjs --base "${{ github.event.pull_request.base.sha }}"
+
+      - name: Validate main package
+        if: github.event_name == 'push'
+        run: node .github/scripts/validate-release.mjs
+
+  release:
+    if: github.event_name == 'push'
+    needs: validate
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create Tag, clean ZIP, and Release
+        shell: bash
+        run: |
+          set -euo pipefail
+          VERSION="$(node -p "require('./assets/platform-runtime/package.json').version")"
+          TAG="v${VERSION}"
+          ARCHIVE="admin-prototype-builder-${TAG}.zip"
+
+          if git rev-parse --verify --quiet "refs/tags/${TAG}"; then
+            echo "Tag ${TAG} already exists. Increment the version before merging."
+            exit 1
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "${TAG}" -m "Admin Prototype Builder ${TAG}"
+          git push origin "${TAG}"
+
+          git archive --format=zip --prefix=admin-prototype-builder/ --output="${ARCHIVE}" "${TAG}"
+
+          if unzip -l "${ARCHIVE}" | grep -Eq 'node_modules|/dist/|prototype-output|admin-prototype-workspace|\.npm-cache|\.DS_Store|\.env|\.(pem|p12|key)$'; then
+            echo "Release archive contains forbidden files."
+            exit 1
+          fi
+
+          gh release create "${TAG}" "${ARCHIVE}" \
+            --verify-tag \
+            --generate-notes \
+            --title "Admin Prototype Builder ${TAG}" \
+            --notes "## 自动验证
+
+          - Release validation passed.
+          - Tag and ZIP were generated from the merged main commit.
+          - The ZIP excludes dependencies, build output, prototype output, screenshots, local metadata, and credentials."

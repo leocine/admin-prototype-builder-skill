@@ -74,6 +74,10 @@ git -C ~/.codex/skills/admin-prototype-builder pull --ff-only
 admin-prototype-builder-skill/
 ├── SKILL.md                         # Skill 入口：需求分析、构建、导出和交付规则
 ├── README.md                        # 本文件：安装、使用、维护和版本发布说明
+├── AGENTS.md                        # Codex 维护与版本发布规则
+├── .github/
+│   ├── scripts/validate-release.mjs # 版本、完整性和安全校验
+│   └── workflows/release.yml        # main 更新后自动发布 Release
 ├── agents/
 │   └── openai.yaml                  # Codex 中展示的名称、简介和默认提示
 ├── assets/
@@ -109,22 +113,8 @@ Codex 会按照下面的顺序完成工作：
 7. **自动检查**：验证没有外部依赖、固定颜色、死按钮和缺失状态。
 8. **视觉验收**：检查桌面和窄屏布局后交付 HTML 与 React 源码。
 
-## 维护与发布规则
+## 版本与更新
 
-本仓库的每一次正式更新都必须发布 GitHub Release，不允许只更新 `main` 而不发布版本。
+当前稳定版本：`v2.0.3`。
 
-发布时必须同时完成：
-
-1. 根据变更范围更新版本号：修复和文档使用 Patch，兼容能力新增使用 Minor，不兼容调整使用 Major。
-2. 将变更合并到 `main`。
-3. 创建对应版本 Tag，例如 `v2.0.1`。
-4. 创建同名 GitHub Release。
-5. 在 Release 说明中写清楚变更内容、使用影响和验证结果。
-6. 从该 Tag 生成干净 ZIP，不能包含 `node_modules`、`dist`、原型输出、测试截图、`.DS_Store`、凭据或真实业务数据。
-7. 确认 Release 附件可以由已授权协作者下载。
-
-## 版本
-
-当前稳定版本：`v2.0.2`。
-
-每个版本的正式更新内容以 [GitHub Releases](https://github.com/leocine/admin-prototype-builder-skill/releases) 为准。
+所有正式更新都通过 [GitHub Releases](https://github.com/leocine/admin-prototype-builder-skill/releases) 发布。合并到 `main` 后会自动校验并生成 Tag、Release 和干净 ZIP；维护细则见 `AGENTS.md`。
