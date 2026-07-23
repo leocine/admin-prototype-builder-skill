@@ -63,6 +63,11 @@ if (!selectSource.includes('<SelectPrimitive.Portal container={portalContainer}>
   fail('Select Portal 必须挂载到 #root，避免作用域化样式和主题变量丢失')
 }
 
+const pageShell = fs.readFileSync(path.join(root, 'assets/page-shell.tsx'), 'utf8')
+if (/>\s*原型数据\s*</.test(pageShell) || /aria-label=["']切换页面状态["']/.test(pageShell)) {
+  fail('页面种子不得在默认业务界面中显示原型标记或状态预览控件')
+}
+
 const versionHeading = '## v' + packageJson.version
 const versionHeadings = [...changelog.matchAll(/^## v\d+\.\d+\.\d+$/gm)]
 if (!versionHeadings.length || versionHeadings[0][0] !== versionHeading) {

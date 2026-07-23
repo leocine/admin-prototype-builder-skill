@@ -36,6 +36,8 @@ try {
     check(/@\/components\/ui\//.test(source), 'React 源码没有使用标准 UI 组件')
     check(/data-prototype-page=/.test(source), 'React 源码缺少 data-prototype-page')
     check(/data-state-coverage=/.test(source), 'React 源码缺少 data-state-coverage')
+    check(!/>\s*原型数据\s*</.test(source), '默认业务界面不得显示“原型数据”标记')
+    check(!/aria-label=["']切换页面状态["']/.test(source), '默认业务界面不得显示状态预览切换器')
     check(!/window\.location\.reload\s*\(/.test(source), '重置逻辑不应刷新页面')
     if (/#[0-9a-f]{3,8}\b/i.test(source)) failures.push('业务页面包含直接十六进制颜色')
     if (/\b(?:bg|text|border)-(?:red|blue|green|yellow|orange|purple|pink|slate|gray)-\d{2,3}\b/.test(source)) failures.push('业务页面使用了固定 Tailwind 色阶')

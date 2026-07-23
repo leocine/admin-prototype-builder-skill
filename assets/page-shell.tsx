@@ -15,19 +15,18 @@ const prototypeRows = [
   { id: 'P-10022', name: '示例记录 B', owner: '示例用户', status: '待处理', createdAt: '2026-07-21 16:45' },
 ]
 
-const previewStates: Array<{ value: PreviewState; label: string }> = [
-  { value: 'normal', label: '正常' },
-  { value: 'loading', label: '加载' },
-  { value: 'empty', label: '空数据' },
-  { value: 'error', label: '失败' },
-  { value: 'disabled', label: '禁用' },
-  { value: 'success', label: '成功' },
-]
+const previewStates: PreviewState[] = ['normal', 'loading', 'empty', 'error', 'disabled', 'success']
+
+function getInitialPreviewState(): PreviewState {
+  if (typeof window === 'undefined') return 'normal'
+  const value = new URLSearchParams(window.location.search).get('prototypeState') as PreviewState | null
+  return value && previewStates.includes(value) ? value : 'normal'
+}
 
 export default function __COMPONENT_NAME__() {
   const [draft, setDraft] = useState({ keyword: '', status: '' })
   const [query, setQuery] = useState(draft)
-  const [previewState, setPreviewState] = useState<PreviewState>('normal')
+  const [previewState, setPreviewState] = useState<PreviewState>(getInitialPreviewState)
   const [page, setPage] = useState(1)
 
   const rows = useMemo(() => prototypeRows.filter((row) => {
@@ -47,7 +46,7 @@ export default function __COMPONENT_NAME__() {
 
   const visibleRows = previewState === 'empty' ? [] : rows
   const tableMessage = previewState === 'loading'
-    ? '正在加载原型数据…'
+    ? '正在加载数据…'
     : previewState === 'error'
       ? '数据加载失败，请重新加载'
       : '暂无符合条件的记录'
@@ -58,22 +57,15 @@ export default function __COMPONENT_NAME__() {
     className="min-h-screen overflow-x-hidden bg-background text-foreground"
   >
     <div className="mx-auto w-full min-w-0 max-w-[1500px] space-y-5 p-4 lg:p-6">
-      <header className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+      <header>
         <div>
-          <div className="mb-2 flex items-center gap-2 text-sm font-medium text-muted-foreground"><Users className="h-4 w-4" />原型工作台</div>
+          <div className="mb-2 flex items-center gap-2 text-sm font-medium text-muted-foreground"><Users className="h-4 w-4" />业务工作台</div>
           <h1 className="text-xl font-semibold">__PAGE_TITLE__</h1>
-          <p className="mt-1 text-sm text-muted-foreground">这是使用后台标准 React 组件构建的交互原型。</p>
-        </div>
-        <div className="flex flex-wrap items-center gap-2">
-          <Badge variant="outline">原型数据</Badge>
-          <Select value={previewState} onValueChange={(value) => setPreviewState(value as PreviewState)}>
-            <SelectTrigger className="w-[150px]" aria-label="切换页面状态"><SelectValue /></SelectTrigger>
-            <SelectContent><SelectGroup>{previewStates.map((state) => <SelectItem key={state.value} value={state.value}>{state.label}</SelectItem>)}</SelectGroup></SelectContent>
-          </Select>
+          <p className="mt-1 text-sm text-muted-foreground">查看并处理相关业务数据。</p>
         </div>
       </header>
 
-      {previewState === 'success' ? <div className="flex items-start gap-3 rounded-2xl border bg-card p-4" role="status"><CheckCircle2 className="mt-0.5 h-5 w-5" /><div><div className="text-sm font-semibold">操作已完成</div><div className="mt-1 text-xs text-muted-foreground">原型已演示成功反馈，业务数据未真实变更。</div></div></div> : null}
+      {previewState === 'success' ? <div className="flex items-start gap-3 rounded-2xl border bg-card p-4" role="status"><CheckCircle2 className="mt-0.5 h-5 w-5" /><div><div className="text-sm font-semibold">操作已完成</div><div className="mt-1 text-xs text-muted-foreground">操作结果已更新。</div></div></div> : null}
 
       <Card className="min-w-0">
         <CardHeader><CardTitle>筛选条件</CardTitle></CardHeader>
