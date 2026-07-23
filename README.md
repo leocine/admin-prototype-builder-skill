@@ -115,6 +115,6 @@ Codex 会按照下面的顺序完成工作：
 
 ## 版本与更新
 
-当前稳定版本：`v2.0.9`。
+当前稳定版本：`v2.0.10`。
 
 所有版本的更新记录统一维护在 [CHANGELOG.md](CHANGELOG.md)，正式安装包通过 [GitHub Releases](https://github.com/leocine/admin-prototype-builder-skill/releases) 发布。合并到 `main` 后会自动提取当前版本记录并生成 Tag、Release 和干净 ZIP；维护细则见 `AGENTS.md`。
