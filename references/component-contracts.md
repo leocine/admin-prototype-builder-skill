@@ -40,6 +40,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 - 提供明确的“全部”选项，并将其映射为不筛选。
 - 受控值必须保存在 React state 中。
 - 直接重置 state，不得刷新页面。
+- Select 等使用 Portal 的浮层必须挂载到 `#root` 内，确保作用域化的 Tailwind 样式和主题变量仍然生效；不得在本运行时中使用默认的 `body` 挂载位置。
 
 ## Card
 

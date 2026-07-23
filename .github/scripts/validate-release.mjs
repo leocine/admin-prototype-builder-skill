@@ -58,6 +58,11 @@ if (!readme.includes('当前稳定版本：' + String.fromCharCode(96) + 'v' + p
 const changelog = fs.readFileSync(path.join(root, 'CHANGELOG.md'), 'utf8')
 if (!changelog.startsWith('# 更新日志\n')) fail('CHANGELOG.md 必须以 # 更新日志 开头')
 
+const selectSource = fs.readFileSync(path.join(root, 'assets/platform-runtime/src/components/ui/select.tsx'), 'utf8')
+if (!selectSource.includes('<SelectPrimitive.Portal container={portalContainer}>')) {
+  fail('Select Portal 必须挂载到 #root，避免作用域化样式和主题变量丢失')
+}
+
 const versionHeading = '## v' + packageJson.version
 const versionHeadings = [...changelog.matchAll(/^## v\d+\.\d+\.\d+$/gm)]
 if (!versionHeadings.length || versionHeadings[0][0] !== versionHeading) {
