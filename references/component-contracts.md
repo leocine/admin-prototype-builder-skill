@@ -36,6 +36,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 - 每个控件上方必须放置可见的 Label。
 - placeholder 只用于格式或示例，不得代替 Label。
+- 紧凑列表工具栏中的搜索框和自解释枚举筛选可以省略可见 Label，但必须提供准确的 `aria-label`，且 placeholder 或当前值能够说明控件用途。
 - 可枚举值使用 Select。
 - 提供明确的“全部”选项，并将其映射为不筛选。
 - 受控值必须保存在 React state 中。
@@ -58,6 +59,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 - 状态使用 Badge。
 - 保留组件内部横向滚动；必要时设置有意义的 `min-w-*` 表格宽度。
 - 加载行和空数据行必须设置正确的 `colSpan`。
+- 紧凑列表使用 `h-9 px-3` 的表头和 `px-3 py-2` 的单元格；详情、对比或富内容表格可以使用默认密度。
 
 ## Badge
 
