@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { AlertCircle, CheckCircle2, ChevronLeft, ChevronRight, RefreshCw, Search, Users } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
@@ -20,6 +21,7 @@ const statusTabs = [
   { value: '正常', label: '正常' },
   { value: '待处理', label: '待处理' },
 ]
+const listStats: Array<{ label: string; value: string }> = []
 
 function getInitialPreviewState(): PreviewState {
   if (typeof window === 'undefined') return 'normal'
@@ -93,6 +95,13 @@ export default function __COMPONENT_NAME__() {
           <p className="mt-1 text-sm text-muted-foreground">查看并处理相关业务数据。</p>
         </div>
       </header>
+
+      {listStats.length ? <section aria-label="数据统计" className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+        {listStats.map((item) => <Card key={item.label}>
+          <CardHeader><CardTitle className="text-sm text-muted-foreground">{item.label}</CardTitle></CardHeader>
+          <CardContent className="font-mono text-3xl font-semibold">{item.value}</CardContent>
+        </Card>)}
+      </section> : null}
 
       {previewState === 'success' ? <div className="flex items-start gap-3 rounded-2xl border bg-card p-4" role="status"><CheckCircle2 className="mt-0.5 h-5 w-5" /><div><div className="text-sm font-semibold">操作已完成</div><div className="mt-1 text-xs text-muted-foreground">操作结果已更新。</div></div></div> : null}
 

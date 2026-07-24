@@ -73,6 +73,9 @@ if (!pageShell.includes('data-list-density="compact"') || !pageShell.includes('h
 if (!pageShell.includes('aria-label="跳转页码"') || !pageShell.includes('首页') || !pageShell.includes('尾页')) {
   fail('页面种子必须包含完整紧凑分页')
 }
+if (!pageShell.includes('aria-label="数据统计"') || !pageShell.includes('listStats.length') || !pageShell.includes('font-mono text-3xl font-semibold')) {
+  fail('页面种子必须包含按需渲染的列表统计摘要组合')
+}
 
 const versionHeading = '## v' + packageJson.version
 const versionHeadings = [...changelog.matchAll(/^## v\d+\.\d+\.\d+$/gm)]
