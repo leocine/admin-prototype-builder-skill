@@ -114,7 +114,7 @@ export default function __COMPONENT_NAME__() {
             <Input aria-label="搜索记录" value={draft.keyword} onChange={(event) => setDraft((current) => ({ ...current, keyword: event.target.value }))} onKeyDown={(event) => { if (event.key === 'Enter') { setQuery(draft); setPage(1); setJumpPage('1') } }} placeholder="搜索编号 / 名称 / 用户" className="pl-9" disabled={previewState === 'disabled'} />
           </div>
           <Select value={draft.category || '__all__'} onValueChange={(value) => setDraft((current) => ({ ...current, category: value === '__all__' ? '' : value }))} disabled={previewState === 'disabled'}>
-            <SelectTrigger className="w-full sm:w-40" aria-label="选择记录类型"><SelectValue /></SelectTrigger>
+            <SelectTrigger className="w-full shrink-0 sm:w-40" aria-label="选择记录类型"><SelectValue /></SelectTrigger>
             <SelectContent><SelectGroup><SelectItem value="__all__">全部类型</SelectItem><SelectItem value="类型 A">类型 A</SelectItem><SelectItem value="类型 B">类型 B</SelectItem></SelectGroup></SelectContent>
           </Select>
           <Button size="sm" onClick={() => { setQuery(draft); setPage(1); setJumpPage('1') }} disabled={previewState === 'disabled'}>查询</Button>
