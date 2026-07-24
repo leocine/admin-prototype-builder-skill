@@ -70,6 +70,9 @@ if (/>\s*原型数据\s*</.test(pageShell) || /aria-label=["']切换页面状态
 if (!pageShell.includes('data-list-density="compact"') || !pageShell.includes('h-9 px-3') || !pageShell.includes('px-3 py-2')) {
   fail('页面种子必须落实紧凑列表密度')
 }
+if (!pageShell.includes('aria-label="跳转页码"') || !pageShell.includes('首页') || !pageShell.includes('尾页')) {
+  fail('页面种子必须包含完整紧凑分页')
+}
 
 const versionHeading = '## v' + packageJson.version
 const versionHeadings = [...changelog.matchAll(/^## v\d+\.\d+\.\d+$/gm)]

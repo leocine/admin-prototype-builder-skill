@@ -60,6 +60,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 - 保留组件内部横向滚动；必要时设置有意义的 `min-w-*` 表格宽度。
 - 加载行和空数据行必须设置正确的 `colSpan`。
 - 紧凑列表使用 `h-9 px-3` 的表头和 `px-3 py-2` 的单元格；详情、对比或富内容表格可以使用默认密度。
+- 分页使用现有 Button 和 Input 组合：当前页按钮使用 `default`，其他页使用 `outline`；页码输入必须设置 `aria-label="跳转页码"`。
 
 ## Badge
 
