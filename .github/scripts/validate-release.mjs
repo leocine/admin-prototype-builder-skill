@@ -67,6 +67,9 @@ const pageShell = fs.readFileSync(path.join(root, 'assets/page-shell.tsx'), 'utf
 if (/>\s*原型数据\s*</.test(pageShell) || /aria-label=["']切换页面状态["']/.test(pageShell)) {
   fail('页面种子不得在默认业务界面中显示原型标记或状态预览控件')
 }
+if (!pageShell.includes('data-list-density="compact"') || !pageShell.includes('h-9 px-3') || !pageShell.includes('px-3 py-2')) {
+  fail('页面种子必须落实紧凑列表密度')
+}
 
 const versionHeading = '## v' + packageJson.version
 const versionHeadings = [...changelog.matchAll(/^## v\d+\.\d+\.\d+$/gm)]

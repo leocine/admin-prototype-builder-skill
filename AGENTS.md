@@ -93,7 +93,7 @@ README 中的当前稳定版本必须等于 package 版本号加前缀 `v`。不
 2. 合并前运行 `node .github/scripts/validate-release.mjs --base <main SHA>`。
 3. 在 PR 中说明修改内容、使用影响和验证结果。
 4. 通过 PR 合并，不得把普通更新直接推送到 `main`。
-5. 合并后由 `.github/workflows/release.yml` 自动创建 Tag、干净 ZIP 和 GitHub Release。Release 标题只能显示版本号，例如 `v2.0.10`。
+5. 合并后由 `.github/workflows/release.yml` 自动创建 Tag、干净 ZIP 和 GitHub Release。Release 标题只能显示版本号，例如 `v2.1.0`。
 6. 确认自动流程成功，并确认公开仓库的 Release 附件无需登录即可下载。
 7. 自动发布失败时，修复工作流或仓库状态，不得手工创建内容不一致的 Release。
 
