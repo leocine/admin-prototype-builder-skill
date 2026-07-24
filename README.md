@@ -62,7 +62,7 @@ git -C ~/.codex/skills/admin-prototype-builder pull --ff-only
 - 一份可直接双击打开、通过 `file://` 运行的离线 HTML。
 - 一份可继续修改的 React 页面源码。
 - 已实现的筛选、分页、表单、弹窗、状态切换和反馈交互。
-- 运营、客服、审核和订单类列表默认采用紧凑表格与响应式筛选工具栏。
+- 运营、客服、审核和订单类列表默认采用紧凑表格、响应式筛选工具栏和完整分页。
 - 加载、空数据、失败、禁用和成功状态。
 - 构建、导出、自动校验及桌面端和窄屏检查结果。
 
@@ -116,6 +116,6 @@ Codex 会按照下面的顺序完成工作：
 
 ## 版本与更新
 
-当前稳定版本：`v2.1.0`。
+当前稳定版本：`v2.2.0`。
 
 所有版本的更新记录统一维护在 [CHANGELOG.md](CHANGELOG.md)，正式安装包通过 [GitHub Releases](https://github.com/leocine/admin-prototype-builder-skill/releases) 发布。合并到 `main` 后会自动提取当前版本记录并生成 Tag、Release 和干净 ZIP；维护细则见 `AGENTS.md`。

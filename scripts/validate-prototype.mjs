@@ -39,6 +39,10 @@ try {
     if (/<Table(?:\s|>)/.test(source)) {
       check(/data-list-density=["']compact["']/.test(source), '列表页面缺少 data-list-density="compact"')
     }
+    if (/上一页|下一页/.test(source)) {
+      check(/首页/.test(source) && /尾页/.test(source), '分页缺少首页或尾页操作')
+      check(/aria-label=["']跳转页码["']/.test(source), '分页缺少可访问的跳页输入')
+    }
     check(!/>\s*原型数据\s*</.test(source), '默认业务界面不得显示“原型数据”标记')
     check(!/aria-label=["']切换页面状态["']/.test(source), '默认业务界面不得显示状态预览切换器')
     check(!/window\.location\.reload\s*\(/.test(source), '重置逻辑不应刷新页面')
