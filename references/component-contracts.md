@@ -49,6 +49,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 - 不得把每个文字区块都放入 Card。
 - 避免嵌套视觉权重相同的 Card。
 - CardHeader 和 CardTitle 只用于真实模块标题，不得重复页面标题。
+- 列表统计摘要使用 `Card + CardHeader + CardTitle + CardContent` 组合，不新增业务专用基础组件。
+- 统计卡片的 `CardTitle` 使用 `text-sm text-muted-foreground`，数值使用 `font-mono text-3xl font-semibold`；卡片网格使用 `grid gap-3 sm:grid-cols-2 xl:grid-cols-3`，并设置 `aria-label="数据统计"`。
+- 统计摘要是可选组合：只有存在明确指标时才渲染，默认列表不得为了填充版面展示虚构指标。
 
 ## Table
 
